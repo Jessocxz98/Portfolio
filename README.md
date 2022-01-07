@@ -1,2 +1,3 @@
-# Portfolio
-Portfolio for my DevOps level 4 apprenticeship
+# Jessica Bulman - Portfolio
+My portfolio for the DevOps level 4 apprenticeship.
+
