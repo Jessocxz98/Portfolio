@@ -16,7 +16,7 @@
 - An image registry is a centralized place where you can upload your images and can also download images created by others.
 **Docker Archictechture**
 - The engine consists of three major components
-- 1. Docker Daemon: The daemon is a process that keeps running in the background and waits for commands from the client. The daemon is capable of managing various Docker objects.
+1. Docker Daemon: The daemon is a process that keeps running in the background and waits for commands from the client. The daemon is capable of managing various Docker objects.
 2. Docker Client: The client is a command-line interface program mostly responsible for transporting commands issued by users.
 3. REST API: The REST API acts as a bridge between the daemon and the client. Any command issued using the client passes through the API to finally reach the daemon.
 
