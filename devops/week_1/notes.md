@@ -28,7 +28,15 @@
 -  Normally, in order for the container to keep running, you have to keep the terminal window open. Closing the terminal window also stops the running container.
 - This is because, by default, containers run in the foreground and attach themselves to the terminal like any other normal program invoked from the terminal.
 - In order to override this behavior and keep a container running in background, you can include the --detach option with the run command.
-- 
+- **Naming a Container**
+- By default every container has two identifiers. Container ID is a random 64 character-long string. Name is a combination of two random words, joined with an underscore.
+- **Restarting a Container**
+- Can either restart a container that has been previously stopped or killed, or reboot a running container.
+- As you've already learned from a previous sub-section, stopped containers remain in your system. 
+- **Removing Dangling Containers**
+- Containers that have been stopped or killed remain in the system. These dangling containers can take up space or can conflict with newer containers.
+- **Running a container in IN
+
 
 ### Docker Cheat Sheet
 - `docker --version`
@@ -37,9 +45,18 @@
 - `docker <object> <command> <options>` Object indicates the type of Docker object you'll be manipulating. This can be a container, image, network or volume object. Command indicates the task to be carried out by the daemon, that is the run command. Options can be any valid parameter that can override the default behavior of the command. The order of the options you provide doesn't really matter. In the case of the run command the image name must come last. If you put anything after the image name then that'll be passed as an argument to the container entry-point
 - `--publish host-port:container-port` For port mapping, can also use `-p`. Using 8080:80 means any request sent to port 8080 of your host system will be forwarded to port 80 inside the container. E.g. `docker container run --publish 8080:80 image-name`
 - `--detach` Can also use `-d`. Used like `docker container run --detach --publish 8080:80 image-name`
+- `docker container create image-name` Creates a container from a given image (without automatically running it)
+- `--name desired-container-name` Used to name a container. E.g. `docker container run --detach --publish 8888:80 --name desired-container-name image-name`
+- `docker container rename old-name/or/id new-name` Renames old containers. The rename command works for containers both in running state and stopped state
 - `docker container ls` lists all containers which are currently running
 - `docker ps -a` or `docker container ls -a` Can use `--all`. Lists all containers which are currently running or have run in the past
-- `ctrl + c` stops running container
+- `ctrl + c` stops containers running in the foreground. Could also close terminal window
+- `docker container stop container-name/or/id` Stops specific container, can be running in the background. The stop command shuts down a container gracefully by sending a SIGTERM signal. If the container doesn't stop within a certain period, a SIGKILL signal is sent which shuts down the container immediately
+- `docker container kill container-name/or/id` In cases where you want to send a SIGKILL signal instead of a SIGTERM signal, you may use the container kill command instead
+- `docker container start container-name/or/id` Can be used to start any created, stopped or killed container. Starts any container in detached mode by default and retains any port configurations made previously
+- `docker container restart container-name/or/id` Reboots a running container. Attempts to stop the target container and then starts it back up again
+- `docker container rm container-name/or/id` Removes a stopped container. Can remove multiple containers at once by passing their identifiers one after another separated by spaces. Can use `--rm` when using container run or container start and the containers will be removed as soon as they're stopped.
+- `docker container prune` Removes all dangling containers in one go
 
 ## Resources
 - history lesson on containers: https://blog.aquasec.com/a-brief-history-of-containers-from-1970s-chroot-to-docker-2016
